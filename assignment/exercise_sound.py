@@ -24,16 +24,17 @@ def playtone(frequency: float, duration: float) -> None:
 def quiet():
     speaker.duty_u16(0)
 
+#              A    C       D       D       D       E       F       F       F       G    E       E      D       C      C        D
+freq: float = [220, 261.6, 293.66, 293.66, 293.66, 329.63, 349.23, 349.23, 349.23, 392, 329.63, 329.63, 293.66, 261.6, 261.6, 293.66]
+duration: float = [1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 3]  # seconds
 
-freq: float = 30
-duration: float = 0.1  # seconds
+duration = duration*0.1
 
 print("Playing frequency (Hz):")
 
-for i in range(64):
-    print(freq)
-    playtone(freq, duration)
-    freq = int(freq * 1.1)
+for i in freq:
+    print(freq[i])
+    playtone(freq[i], duration[i])
 
 # Turn off the PWM
 quiet()
