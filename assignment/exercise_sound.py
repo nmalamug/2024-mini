@@ -5,6 +5,7 @@ PWM Tone Generator
 based on https://www.coderdojotc.org/micropython/sound/04-play-scale/
 """
 
+
 import machine
 import utime
 
@@ -25,16 +26,19 @@ def quiet():
     speaker.duty_u16(0)
 
 #              A    C       D       D       D       E       F       F       F       G    E       E      D       C      C        D
-freq: float = [220, 261.6, 293.66, 293.66, 293.66, 329.63, 349.23, 349.23, 349.23, 392, 329.63, 329.63, 293.66, 261.6, 261.6, 293.66]
-duration: float = [1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 3]  # seconds
+freq = [220, 261.6, 293.66, 293.66, 293.66, 329.63, 349.23, 349.23, 349.23, 392, 329.63, 329.63, 293.66, 261.6, 261.6, 293.66]
+duration = [1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 3]  # seconds
 
-duration = duration*0.15
+for i in range(len(duration)):
+    duration[i] *= 0.15
+
+duration = duration
 
 print("Playing frequency (Hz):")
 
-for i in freq:
+for i in range(len(duration)):
     print(freq[i])
-    playtone(freq[i], duration[i])
+    playtone(int(freq[i]), duration[i])
 
 # Turn off the PWM
 quiet()
