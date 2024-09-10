@@ -24,9 +24,9 @@ Experiment using exercise_light.py to find approximate max_bright and min_bright
 
 1. what are the "max_bright" and "min_bright" values you found?
 
-We found min_bright is 500 under a full-brightness phone flashlight. 
+We set min_bright to 500 for 0% duty cycle under a full-brightness phone flashlight. 
 
-max_bright is 51000 when the photoresistor is covered.
+max_bright was set to 51000 so that the LED turns off when the photoresistor is covered.
 
 ## Notes
 
