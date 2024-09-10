@@ -24,6 +24,10 @@ Experiment using exercise_light.py to find approximate max_bright and min_bright
 
 1. what are the "max_bright" and "min_bright" values you found?
 
+We found min_bright is 500 under a full-brightness phone flashlight. 
+
+max_bright is 51000 when the photoresistor is covered.
+
 ## Notes
 
 Pico MicroPython time.sleep() doesn't error for negative values even though such are obviously incorrect--it is undefined for a system to sleep for negative time.
