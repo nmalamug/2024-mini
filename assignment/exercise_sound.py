@@ -28,7 +28,7 @@ def quiet():
 freq: float = [220, 261.6, 293.66, 293.66, 293.66, 329.63, 349.23, 349.23, 349.23, 392, 329.63, 329.63, 293.66, 261.6, 261.6, 293.66]
 duration: float = [1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 3]  # seconds
 
-duration = duration*0.2
+duration = duration*0.15
 
 print("Playing frequency (Hz):")
 
