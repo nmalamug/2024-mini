@@ -8,7 +8,21 @@ import random
 import json
 
 
-N: int = 3
+
+
+import network
+
+ssid = 'BU Guest (unencrypted)'
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect(ssid)
+while not wlan.isconnected():
+    print("Attempting to connect...")
+    time.sleep(1)
+print("Connected!")
+
+
+N: int = 10
 sample_ms = 10.0
 on_ms = 500
 
@@ -58,7 +72,17 @@ def scorer(t: list[int | None]) -> None:
     # and score (non-misses / total flashes) i.e. the score a floating point number
     # is in range [0..1]
     data = {}
-
+    if(len(t_good) !=0):
+        data["max"] = max(t_good)
+        data["min"] = min(t_good)
+        data["average"] = sum(t_good)/len(t_good)
+        data["score"] = len(t_good)/len(t)
+    else:
+        data["max"] = 0
+        data["min"] = 0
+        data["average"] = 0.0
+        data["score"] = 0.0
+    
     # %% make dynamic filename and write JSON
 
     now: tuple[int] = time.localtime()
@@ -69,13 +93,23 @@ def scorer(t: list[int | None]) -> None:
     print("write", filename)
 
     write_json(filename, data)
+    
+    url = 'https://script.google.com/macros/s/AKfycbzQzmRrAnOQBMbUzcBY5DiffUTnwJNcg2bsnLVUCQ08PEB4I-w_K5zg5PeV98uIegm1/exec'
+
+    import urequests as requests
+
+    data_str = json.dumps(data)
+
+    response = requests.post(url,data=data_str)
+
+    print('Response:', response.text)
 
 
 if __name__ == "__main__":
     # using "if __name__" allows us to reuse functions in other script files
 
     led = Pin("LED", Pin.OUT)
-    button = Pin(16, Pin.IN, Pin.PULL_UP)
+    button = Pin(11, Pin.IN, Pin.PULL_UP)
 
     t: list[int | None] = []
 
